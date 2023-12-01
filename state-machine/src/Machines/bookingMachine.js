@@ -1,32 +1,32 @@
-import { createMachine } from 'xstate';
+import { createMachine } from "xstate";
 
 const bookingMachine = createMachine({
   id: "buy plane tickets",
-  initial: "inicial",
+  initial: "initial",
   states: {
-    inicial: {
+    initial: {
       on: {
         START: "search",
-      }
+      },
     },
     search: {
       on: {
         CONTINUE: "passengers",
-        CANCEL: "inicial"
-      }
+        CANCEL: "initial",
+      },
+    },
+    tickets: {
+      on: {
+        FINISH: "initial",
+      },
     },
     passengers: {
       on: {
         DONE: "tickets",
-        CANCEL: "inicial"
-      }
+        CANCEL: "initial",
+      },
     },
-    tickets: {
-      on: {
-        FINISH: "inicial"
-      }
-    }
-  }
+  },
 });
 
 export default bookingMachine;
