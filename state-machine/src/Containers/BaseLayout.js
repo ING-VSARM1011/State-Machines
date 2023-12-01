@@ -9,6 +9,8 @@ export const BaseLayout = () => {
     
   const [state, send] = useMachine(bookingMachine);
 
+  console.log('nuestra máquina initial', state, state.context);
+
   return (
     <div className="BaseLayout">
       <Nav 

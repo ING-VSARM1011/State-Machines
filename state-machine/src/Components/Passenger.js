@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./Passenger.css";
 
 export const Passengers = ({ state, send }) => {
+  console.log(state);
+
   const [value, changeValue] = useState("");
 
   const onChangeInput = (e) => {
@@ -9,11 +11,12 @@ export const Passengers = ({ state, send }) => {
   };
 
   const goToTicket = () => {
-    send("DONE");
+    send("DONE", { newPassenger: [] });
   };
 
   const submit = (e) => {
     e.preventDefault();
+    send("ADD", { newPassenger: value });
     changeValue("");
   };
 
@@ -22,6 +25,11 @@ export const Passengers = ({ state, send }) => {
       <p className="Passengers-title title">
         Agrega a las personas que van a volar ✈️
       </p>
+      {state.context.passengers.length > 0 && 
+        state.context.passengers.map((passenger, index) => (
+          <p key={index} className="text">{passenger}</p>
+        ))
+      }
       <input
         id="name"
         name="name"
