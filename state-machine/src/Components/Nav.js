@@ -4,7 +4,7 @@ import "./Nav.css";
 export const Nav = ({ state, send }) => {
   
   const goToWelcome = () => {
-    send("CANCEL");
+    send("CANCEL", { newPassenger: [] });
   };
 
   return (

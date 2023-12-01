@@ -69,12 +69,20 @@ const bookingMachine = createMachine(
           }
         },
         on: {
-          FINISH: "initial",
+          FINISH: {
+            target: "initial",
+            actions: assign({
+              passengers: (context, event) => event.newPassenger
+            })
+          },
         },
       },
       passengers: {
         on: {
-          DONE: "tickets",
+          DONE: {
+            target: "tickets",
+            cond: "moreThanOnePassenger"
+          },
           CANCEL: {
             target: "initial",
             actions: assign({
@@ -98,6 +106,11 @@ const bookingMachine = createMachine(
         passengers: [],
       }),
     },
+    guards: {
+      moreThanOnePassenger: (context) => {
+        return context.passengers.length > 0;
+      }
+    }
   }
 );
 
