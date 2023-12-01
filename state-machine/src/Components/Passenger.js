@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./Passenger.css";
 
 export const Passengers = ({ state, send }) => {
-  console.log(state);
 
   const [value, changeValue] = useState("");
 
